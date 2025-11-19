@@ -11,7 +11,7 @@ const experienceService = (() => {
 
     const getRecommendNotice=async ()=>{
 
-        const url=`https://courier-moscow-tramadol-entitled.trycloudflare.com/api/user-experience`;
+        const url=`https://button-jonathan-vbulletin-essence.trycloudflare.com/api/user-experience`;
         const memberId=user.id;
         const response=await fetch(url, {
             method: "POST",
