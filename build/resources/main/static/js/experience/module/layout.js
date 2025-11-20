@@ -45,7 +45,53 @@ const experienceLayout = (() => {
         applyFilters();
     };
 
-    return { showList };
+    const showRecommand=async (result)=>{
+        const container=document.getElementById("recommend-container");
+        let html = '';
+
+        console.log(result.valueOf());
+        console.log(result.result)
+
+        if (!container) return;
+
+        html+=`<h1 style="font-size: 24px; font-weight: 500; margin-top: 24px" class="galaxy-btn">사용자님의 활동 기반 추천 공고</h1>
+<div>
+<div  style="overflow-y: auto; height: 390px">`;
+
+        for (item of result.result){
+            const experienceId = item[0];
+            const title = item[1];
+            const companyId = item[2];
+
+            console.log("반복문 들어옴")
+            console.log(item);
+            console.log(item.valueOf())
+
+            const fileUrl = await fetch(`/api/experiences/profile?companyId=${companyId}`)
+                                  .then(res => res.text());
+
+            html+=`
+<div class="list-item list-right">
+                        <button class="list-item-btn recomm experience-saved"
+  data-company-id="${companyId}" 
+  data-experience-id="${experienceId}">
+                            <div class="list-item-header">
+                                <div class="list-item-thumb"><img src="${fileUrl}" alt=""></div>
+                                <div class="list-item-content">
+                                    <p class="list-item-subtitle">${title || ''}</p>
+                                </div>
+                            </div>
+                        </button>
+                    </div>`
+        }
+
+        html+=`
+</div>
+</div>`;
+        container.innerHTML=html;
+    }
+
+    return { showList:showList, showRecommand:showRecommand };
 })();
 
 // 필터 적용 함수

@@ -6,47 +6,7 @@ const contentMainList=document.querySelector(".content-main");
 
 
 
-// function categoryTagFn() {
-//     const box = document.querySelector(".categoty-tag-box");
-//     if (!box) return;
 
-//     const previewInner = box.querySelector(".popup-category-preview-inner");
-//     const dropdownBtns = box.querySelectorAll(".dropdown-btn");
-
-//     dropdownBtns.forEach((btn) => {
-//         btn.addEventListener("click", () => {
-//             const text = btn.innerText.trim();
-
-//             // 이미 같은 태그가 있으면 추가 안 함
-//             const exists = [
-//                 ...previewInner.querySelectorAll(".preview-category-item p"),
-//             ].some((p) => p.innerText === text);
-//             if (exists) return;
-
-//             // 새 태그 요소 만들기
-//             const item = document.createElement("div");
-//             item.className = "preview-category-item";
-//             item.innerHTML = `
-//                 <p>${text}</p>
-//                 <button class="preview-remove-btn">
-//                     <svg viewBox="0 0 24 24" aria-label="icon" fill="currentColor" height="16" role="img" width="16">
-//                         <path clip-rule="evenodd" fill-rule="evenodd"
-//                               d="M6.434 6.435a.8.8 0 0 1 1.132 0L12 10.869l4.434-4.434a.8.8 0 1 1 1.132 1.13L13.13 12l4.435 4.435a.8.8 0 1 1-1.132 1.13L12 13.133l-4.434 4.434a.8.8 0 0 1-1.132-1.131L10.87 12 6.434 7.566a.8.8 0 0 1 0-1.131"/>
-//                     </svg>
-//                 </button>
-//             `;
-
-//             previewInner.appendChild(item);
-
-//             // 삭제 버튼 이벤트
-//             const removeBtn = item.querySelector(".preview-remove-btn");
-//             removeBtn.addEventListener("click", () => {
-//                 item.remove();
-//             });
-//         });
-//     });
-// }
-// categoryTagFn();
 
 
 
@@ -519,7 +479,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const shareBtn = e.target;
             const textBox = saveToast.querySelector("p");
             // 공유하기
-            let url = `http://kok-in.shop/experience/list?sharedCompanyId=${shareBtn.dataset.companyid}&sharedExperienceId=${shareBtn.dataset.experienceid}`;
+            let url = `http://3.37.158.124.6/experience/list?sharedCompanyId=${shareBtn.dataset.companyid}&sharedExperienceId=${shareBtn.dataset.experienceid}`;
             const textarea = document.createElement("textarea");
             document.body.appendChild(textarea);
             textarea.value = url;
@@ -1616,6 +1576,36 @@ async function fetchExperiences() {
     }
 }
 
+const showPosts=async ()=> {
+    if(user!=null){
+        const recomOkay=await fetch(`/api/experiences/is-okay/retrieve?memberId=${user.id}`);
+        const recomOkayPre=await recomOkay.json();
+        const recomRealOkay=await recomOkayPre;
+        console.log("##############################################################");
+        console.log(recomRealOkay)
+        console.log(user.id)
+        if(recomRealOkay){
+            const loading=document.getElementById("recommend-loading");
+            loading.style.display="block";
+            const request = await experienceService.getRecommendNotice();
+            await experienceLayout.showRecommand(request);
+            loading.style.display="none";
+
+            const wrapDiv=document.querySelectorAll("button.list-item-btn.recomm");
+
+            wrapDiv.forEach((div)=>{
+                div.addEventListener("click", (e)=>{
+                    // console.log(e);
+                    const companyId=parseInt(e.currentTarget.dataset.companyId, 10);
+                    const experienceId=parseInt(e.currentTarget.dataset.experienceId, 10);
+                    // console.log(companyId, experienceId);
+                    window.location.href=`/experience/list?sharedCompanyId=${companyId}&sharedExperienceId=${experienceId}`;
+                });
+            });
+        }
+    }
+}
+
 // ------------------------------
 // 3. 검색 버튼 + Enter 처리
 // ------------------------------
@@ -1666,6 +1656,7 @@ function initExperienceModule() {
     initSearch();
     initSortButtons();
     fetchExperiences();
+    showPosts();
 }
 
 initExperienceModule();

@@ -55,7 +55,8 @@ const experienceLayout = (() => {
         if (!container) return;
 
         html+=`<h1 style="font-size: 24px; font-weight: 500; margin-top: 24px" class="galaxy-btn">사용자님의 활동 기반 추천 공고</h1>
-<div>`;
+<div>
+<div  style="overflow-y: auto; height: 390px">`;
 
         for (item of result.result){
             const experienceId = item[0];
@@ -70,7 +71,7 @@ const experienceLayout = (() => {
                                   .then(res => res.text());
 
             html+=`
-<div class="list-item" style="overflow: auto; height: 390px">
+<div class="list-item list-right">
                         <button class="list-item-btn recomm experience-saved"
   data-company-id="${companyId}" 
   data-experience-id="${experienceId}">
@@ -85,6 +86,7 @@ const experienceLayout = (() => {
         }
 
         html+=`
+</div>
 </div>`;
         container.innerHTML=html;
     }

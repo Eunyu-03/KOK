@@ -165,12 +165,11 @@ public class ExperienceRestController implements ExperienceRestControllerDocs{
 
 //    추천 띄울까?
     @GetMapping("/is-okay/retrieve")
-    public boolean isOkayRetrieve(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        if(customUserDetails==null) {
+    public boolean isOkayRetrieve(@RequestParam Long memberId) {
+        if(memberId==null) {
             return false;
         }
-        System.out.println(customUserDetails.getId()+"sout");
-        System.out.println(experienceNoticeService.isOkayRetrieve(customUserDetails.getId())+"sout");
-        return experienceNoticeService.isOkayRetrieve(customUserDetails.getId());
+        System.out.println(memberId+"sout");
+        return experienceNoticeService.isOkayRetrieve(memberId);
     }
 }

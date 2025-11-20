@@ -2242,3 +2242,7 @@ input:-internal-autofill-selected {
 .galaxy-btn:active {
     transform: scale(0.95);
 }
+
+div.list-item.list-right{
+    padding: 15px;
+}

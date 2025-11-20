@@ -9,6 +9,20 @@ const experienceService = (() => {
         return await response.json();
     };
 
+    const getRecommendNotice=async ()=>{
+
+        const url=`https://string-hostels-above-indie.trycloudflare.com/api/user-experience`;
+        const memberId=user.id;
+        const response=await fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ memberId })
+        })
+        return await response.json();
+    }
+
     const pay = async (money, requestExperienceDTO) => {
         try {
             const response = await Bootpay.requestPayment({
@@ -102,5 +116,5 @@ const experienceService = (() => {
             }
         }
     };
-    return { getExperienceNotice:getExperienceNotice, pay:pay };
+    return { getExperienceNotice:getExperienceNotice, pay:pay, getRecommendNotice:getRecommendNotice };
 })();
