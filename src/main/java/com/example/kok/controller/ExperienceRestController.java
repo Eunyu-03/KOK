@@ -169,6 +169,8 @@ public class ExperienceRestController implements ExperienceRestControllerDocs{
         if(customUserDetails==null) {
             return false;
         }
+        System.out.println(customUserDetails.getId());
+        System.out.println(experienceNoticeService.isOkayRetrieve(customUserDetails.getId()));
         return experienceNoticeService.isOkayRetrieve(customUserDetails.getId());
     }
 }

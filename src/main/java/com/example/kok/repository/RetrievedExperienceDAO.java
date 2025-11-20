@@ -16,6 +16,6 @@ public class RetrievedExperienceDAO {
 
 //    10번 이상 상세 페이지를 조회했는지 검사
     public boolean isOkayToRetrieve(Long memberId){
-        return retrievedExperienceMapper.selectCountRetrieved(memberId)>10;
+        return retrievedExperienceMapper.selectCountRetrieved(memberId)>9;
     }
 }
