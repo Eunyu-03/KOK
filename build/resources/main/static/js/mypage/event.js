@@ -313,12 +313,21 @@ const showProfileUpdate=async ()=>{
     profileset.addEventListener("click", (e) => {
         profile.style.display = "flex";
     });
+
+    // 프로필 사진 변경 창 닫기
+    document.addEventListener("click", (e) => {
+        if (!profileWrapCircle.contains(e.target) && !profileImgPop.contains(e.target)) {
+            profileImgPop.style.display = "none";
+        }
+    });
+
     // 프로필 이미지 변경
     profileUpdate.addEventListener("click", ()=>{
         profileImgPop.style.display="none";
         profileInput.click();
     });
     profileInput.onchange=function (e){
+        profileDeleteReal=false;
         const file=e.target.files[0];
         if(!file) return;
         const fileRead=new FileReader();
@@ -326,7 +335,6 @@ const showProfileUpdate=async ()=>{
             profileImgRound.src=e2.target.result;
         }
         fileRead.readAsDataURL(file);
-        profileDeleteReal=false;
     }
     // 프로필 삭제
     profileDelete.addEventListener("click", ()=>{

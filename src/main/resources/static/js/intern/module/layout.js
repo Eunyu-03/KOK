@@ -42,14 +42,14 @@ const internLayout = (() => {
 
         container.innerHTML = html;
 
-        applyFilters();
+        internApplyFilters();
     };
 
     return { showList };
 })();
 
 // 필터 적용 함수
-function applyFilters() {
+function internApplyFilters() {
     const listItems = document.querySelectorAll(".list-item");
 
     // active 직군 버튼 p 텍스트

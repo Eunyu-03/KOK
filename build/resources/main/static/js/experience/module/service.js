@@ -11,7 +11,7 @@ const experienceService = (() => {
 
     const getRecommendNotice=async ()=>{
 
-        const url=`https://string-hostels-above-indie.trycloudflare.com/api/user-experience`;
+        const url=`https://pad-valued-phentermine-kingdom.trycloudflare.com/api/user-experience`;
         const memberId=user.id;
         const response=await fetch(url, {
             method: "POST",

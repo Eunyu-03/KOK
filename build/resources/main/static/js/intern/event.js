@@ -1632,8 +1632,8 @@ const sectorComplBtn = document.getElementById("sector-compl-btn");
 const scaleComplBtn = document.getElementById("scale-compl-btn");
 
 // 이벤트 등록
-sectorComplBtn.addEventListener("click", applyFilters);
-scaleComplBtn.addEventListener("click", applyFilters);
+sectorComplBtn.addEventListener("click", internApplyFilters);
+scaleComplBtn.addEventListener("click", internApplyFilters);
 document.getElementById("search-form")?.addEventListener("submit", e => {
     e.preventDefault();
     showList();

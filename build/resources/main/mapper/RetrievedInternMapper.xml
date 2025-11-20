@@ -4,6 +4,6 @@
 <!--    insert-->
     <insert id="insertRetrievedIntern">
         insert into tbl_ai_retrieved_intern(member_id, intern_id)
-        values (#{memberId}, #{enternId})
+        values (#{memberId}, #{internId})
     </insert>
 </mapper>
