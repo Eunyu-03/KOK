@@ -11,6 +11,14 @@
   <img src="https://github.com/user-attachments/assets/cfdf8ae2-65cd-4367-b50d-2a6550aea365" width="400" />
 </div>
 
+그래프 구현 과정↓
+
+<a href="https://github.com/Eunyu-03/kok-portfolio/blob/master/visualization_employment.ipynb" 
+   target="_blank" 
+   style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:white; text-decoration:none; border-radius:6px; font-weight:bold;">
+   📊 Employment Visualization Notebook
+</a>
+
 
 데이터 출처: KOSIS
 
