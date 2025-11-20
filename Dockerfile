@@ -51,8 +51,7 @@ WORKDIR /kok
 COPY . .
 
 # Gradle 빌드 실행 (build/libs/*.jar 생성됨)
-# --no-daemon 옵션으로 빌드 데몬 비활성화 → 메모리/디스크 사용 줄임
-RUN chmod +x ./gradlew && ./gradlew clean build -x test --no-daemon
+RUN chmod +x ./gradlew && ./gradlew build -x test
 
 # 2단계: 실제 실행 이미지 (최종 이미지)
 FROM eclipse-temurin:17-jre
@@ -61,11 +60,10 @@ FROM eclipse-temurin:17-jre
 ENV TZ=Asia/Seoul
 
 # JAR 복사 (위 단계에서 생성된 JAR)
-# 버전이 바뀌어도 *.jar 와일드카드로 대응
-COPY --from=build /kok/build/libs/*.jar app.jar
+COPY --from=build /kok/build/libs/kok-0.0.1-SNAPSHOT.jar kok.jar
 
 # 포트 오픈 (Spring Boot 기본 포트)
 EXPOSE 10000
 
 # 실행 명령
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "kok.jar"]
