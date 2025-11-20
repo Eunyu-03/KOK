@@ -8,7 +8,7 @@
     </insert>
 
 <!--    select-->
-    <select id="selectCountRetrieved">
+    <select id="selectCountRetrieved" resultType="int">
         select count(*)
         from tbl_ai_retrieved_experience
         where member_id=#{memberId}
