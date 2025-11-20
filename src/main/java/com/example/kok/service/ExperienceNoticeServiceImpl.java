@@ -197,6 +197,7 @@ public class ExperienceNoticeServiceImpl implements ExperienceNoticeService {
 
     @Override
     public boolean isOkayRetrieve(Long memberId) {
+        System.out.println("서비스: "+memberId+"sout");
         return retrievedExperienceDAO.isOkayToRetrieve(memberId);
     }
 }
