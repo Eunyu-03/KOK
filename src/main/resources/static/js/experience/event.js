@@ -1580,8 +1580,10 @@ const showPosts=async ()=> {
     if(user!=null){
         const recomOkay=await fetch(`/api/experiences/is-okay/retrieve?memberId=${user.id}`);
         const recomOkayPre=await recomOkay.json();
-        const reomRealOkay=await recomOkayPre;
-        if(reomRealOkay){
+        const recomRealOkay=await recomOkayPre;
+        console.log("##############################################################");
+        console.log(recomRealOkay);
+        if(recomRealOkay){
             const loading=document.getElementById("recommend-loading");
             loading.style.display="block";
             const request = await experienceService.getRecommendNotice();
