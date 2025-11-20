@@ -1582,7 +1582,8 @@ const showPosts=async ()=> {
         const recomOkayPre=await recomOkay.json();
         const recomRealOkay=await recomOkayPre;
         console.log("##############################################################");
-        console.log(recomRealOkay);
+        console.log(recomRealOkay)
+        console.log(user.id)
         if(recomRealOkay){
             const loading=document.getElementById("recommend-loading");
             loading.style.display="block";
