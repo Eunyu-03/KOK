@@ -6,20 +6,6 @@
 
 <img width="1924" height="1080" alt="Image" src="https://github.com/user-attachments/assets/068f5614-a650-4d61-984b-18c06515af28" />
 
-<div style="display: flex; justify-content: center; gap: 20px;">
-  <img src="https://github.com/user-attachments/assets/b93b5b2b-fe99-4cc6-a47f-18d86a766a6e" width="400" />
-  <img src="https://github.com/user-attachments/assets/cfdf8ae2-65cd-4367-b50d-2a6550aea365" width="400" />
-</div>
-
-그래프 구현 과정↓
-
-<a href="https://github.com/Eunyu-03/kok-portfolio/blob/master/visualization_employment.ipynb" 
-   target="_blank" 
-   style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:white; text-decoration:none; border-radius:6px; font-weight:bold;">
-   📊 Employment Visualization Notebook
-</a>
-
-
 데이터 출처: KOSIS
 
 - 왼쪽 이미지: 최근 청년층 취업자 수 추이
@@ -48,7 +34,73 @@
 
 ---
 
-## 🌟 2. 기대 효과
+## 📊 2. 공공 데이터 분석
+
+### 📌 분석 목적
+
+청년층 고용 감소의 사회적 문제를 정량적으로 진단하고, 이를 바탕으로 플랫폼의 필요성과 사회적 가치를 데이터 기반으로 설명하고자 하였다.  
+이를 위해 **KOSIS**(국가통계포털)에서 제공하는 고용 데이터를 수집하고, `pandas`, `numpy`, `matplotlib`를 활용하여 분석을 수행하였다.
+
+
+### 🧪 데이터 수집 및 전처리
+
+- **데이터 출처**: [KOSIS 국가통계포털](https://kosis.kr)
+- **분석 대상**: 2025년 5월 ~ 10월 기준, 연령대별 취업자 수 (단위: 천 명)
+- **사용 라이브러리**:
+
+  ```python
+  import pandas as pd
+  import numpy as np
+  import matplotlib.pyplot as plt
+  ```
+
+### 🧪 전처리 과정
+
+- 연령대별 시계열 데이터를 `DataFrame`으로 구성  
+- 날짜 형식 통일 및 인덱스 설정  
+- 결측치 및 이상치 확인 후 보간 처리  
+
+
+### 📈 시각화 결과
+
+<div style="display: flex; justify-content: center; gap: 20px;">
+  <img src="https://github.com/user-attachments/assets/b93b5b2b-fe99-4cc6-a47f-18d86a766a6e" width="400" />
+  <img src="https://github.com/user-attachments/assets/cfdf8ae2-65cd-4367-b50d-2a6550aea365" width="400" />
+</div>
+
+- **왼쪽 그래프**: 청년층(15~29세) 취업자 수 추이  
+- **오른쪽 그래프**: 30세 이상 취업자 수 추이
+
+#### 구현 코드
+
+<a href="https://github.com/Eunyu-03/kok-portfolio/blob/master/visualization_employment.ipynb" 
+   target="_blank" 
+   style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:white; text-decoration:none; border-radius:6px; font-weight:bold;">
+   📊 Employment Visualization Notebook
+</a>
+
+
+### 🔍 분석 결과 및 해석
+
+청년층(15~29세) 취업자 수는 2025년 5월 **3682천 명**에서 10월 **3521천 명**으로 약 **4.4% 감소**  
+→ 특히 **20대 초반**에서 하락폭이 두드러졌으며, 이는 실무 경험 부족 및 직무 이해도 부족과 연관된 것으로 해석됨
+
+30세 이상 취업자 수는 같은 기간 동안 **안정적인 유지**  
+→ 일시적 공백(출장, 육아휴직 등)은 존재하지만, 전체 고용 규모에는 큰 변동 없음
+
+
+### 🧩 인사이트 및 서비스 기획 연계
+
+청년층 고용 감소와 기성 세대의 고용 안정성 사이의 간극을 데이터로 확인
+
+이 간극을 활용하여, 다음과 같은 **실무 중심 고용 모델**을 제안:
+
+> “재직자의 일시적 공백을 청년이 단기 체험으로 메우는 구조”
+
+
+---
+
+## 🌟 3. 기대 효과
 
 <img width="1919" height="1069" alt="Image" src="https://github.com/user-attachments/assets/78e2d05c-a1e4-47ea-82df-e53f1c699eab" />
 
@@ -56,7 +108,7 @@
 
 ---
 
-## 🛠️ 3. 프로젝트 사용 툴 & 스킬
+## 🛠️ 4. 프로젝트 사용 툴 & 스킬
 
 | 구분                                | 사용 기술                                                                                                                                                                    |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -72,7 +124,7 @@
 
 ---
 
-## 🗂️ 4. ERD
+## 🗂️ 5. ERD
 
 -   DML 문법으로 실제 데이터를 직접 `insert`, `update`, `delete`, `select` 하고 확인했다.
 -   테이블 간의 관계를 고려하여 ERD를 구성하였다.
@@ -81,7 +133,7 @@
 
 ---
 
-## 🎨 5. UI/UX 화면 설계
+## 🎨 6. UI/UX 화면 설계
 
 ### 🔍 벤치마킹 웹 사이트: 로켓펀치
 
@@ -104,7 +156,7 @@
 
 ---
 
-## 💼 6. 담당 업무
+## 💼 7. 담당 업무
 
 ### 🎯 프론트엔드
 
@@ -167,7 +219,7 @@
 
 ---
 
-## 🧩 7. 트러블 슈팅
+## 🧩 8. 트러블 슈팅
 
 ### ⚠️ 오류 발생
 
@@ -217,7 +269,7 @@ finNoticeById의 파라미터인 id로 키 값을 변경하였다. 그 결과 �
 
 ---
 
-## 🧪 8. QA 테스트
+## 🧪 9. QA 테스트
 
 -   기능별로 테스트 케이스를 작성하고, QA 테스트를 진행하였다.
 -   체험 공고 필터링, 지원 기능, 마이페이지 접근 등 주요 기능에 대해 반복 테스트를 수행하여 안정성을 확보하였다.
@@ -227,7 +279,7 @@ finNoticeById의 파라미터인 id로 키 값을 변경하였다. 그 결과 �
 
 ---
 
-## 📱 9. 앱 전환 - Web View
+## 📱 10. 앱 전환 - Web View
 
 -   `react-native` 기술로 모바일 화면을 구축하였다.
 -   웹 화면을 앱에 통합하여 모바일 환경에서도 동일한 사용자 경험을 제공하도록 설계하였다.
@@ -242,7 +294,7 @@ finNoticeById의 파라미터인 id로 키 값을 변경하였다. 그 결과 �
 
 ---
 
-## 🏗️ 10. AWS 클라우드 배포
+## 🏗️ 11. AWS 클라우드 배포
 
 <img width="2560" height="1440" alt="Image" src="https://github.com/user-attachments/assets/f1bab364-bc66-4593-b12b-b8e3ef891fd1" />
 
@@ -275,7 +327,7 @@ finNoticeById의 파라미터인 id로 키 값을 변경하였다. 그 결과 �
 
 ---
 
-## 🌐 11. Cloudflare Tunnel 활용
+## 🌐 12. Cloudflare Tunnel 활용
 
 -   **FastAPI 개발**
 
@@ -310,7 +362,7 @@ finNoticeById의 파라미터인 id로 키 값을 변경하였다. 그 결과 �
 
 ---
 
-## ✨ 12. 느낀 점
+## ✨ 13. 느낀 점
 
 ### 🧠 기획: 탄탄한 기획이 순조로운 작업으로 이어진다
 
