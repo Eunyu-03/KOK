@@ -25,6 +25,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+
+        String path = request.getServletPath();
+        if (path.startsWith("/api/public/") || path.equals("/api/experiences/is-okay/retrieve")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String token = jwtTokenProvider.parseTokenFromHeader(request);
 
         if(token != null) {
