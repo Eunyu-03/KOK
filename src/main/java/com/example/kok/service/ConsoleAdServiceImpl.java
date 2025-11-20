@@ -97,7 +97,7 @@ public class ConsoleAdServiceImpl implements ConsoleAdService {
                     // S3 업로드
                     String s3Key = s3Service.uploadFile(multipartFile, getPath());
 
-                    // 파일 DTO 구성
+                    // 파일 DTO 구성~
                     FileDTO fileDTO = new FileDTO();
                     fileDTO.setFileOriginName(multipartFile.getOriginalFilename());
                     fileDTO.setFileName(UUID.randomUUID().toString());
