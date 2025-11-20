@@ -56,7 +56,7 @@ RUN chmod +x ./gradlew && ./gradlew build -x test
 # 2단계: 실제 실행 이미지 (최종 이미지)
 FROM eclipse-temurin:17-jre
 
-# 타임존 설정 (한국 시간)
+# 타임존 설정 (아시아 서울 시간)
 ENV TZ=Asia/Seoul
 
 # JAR 복사 (위 단계에서 생성된 JAR)
