@@ -10,29 +10,29 @@ server:
       timeout: 10m
 
 spring:
+  profiles:
+    active: local
+    include: oauth
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${EC2_HOST}:5432/app?serverTimezone=Asia/Seoul
+    url: jdbc:postgresql://3.37.158.124:5432/app?serverTimezone=Asia/Seoul
     username: spring
-    password: ${DATABASE_PASSWORD}
+    password: 1234
   session:
     redis:
       repository-type: indexed
       flush-mode: immediate
   data:
     redis:
-      host: ${EC2_HOST}
+      host: 3.37.158.124
       port: 6379
   cache:
     type: redis
-  profiles:
-    active: local
-    include: oauth
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${MAIL_USERNAME}
-    password: ${MAIL_PASSWORD}
+    username: wjddmsdb03@gmail.com
+    password: jacu jlyg vhri jcnh
     properties:
       mail:
         smtp:
@@ -47,16 +47,13 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-#  openssl rand -base64 32
+# openssl rand -base64 32
 jwt:
-  secret: ${JWT_SECRET}
+  secret: X6boTs4ejNABCquznMAuLFUvu3yMvu7ICL/X+/tGzus=
 
 aws:
-  access-key: ${AWS_ACCESS_KEY_ID}
-  secret-key: ${AWS_SECRET_ACCESS_KEY}
+  access-key: AKIAYXFRP3AMCOTGAH4L
+  secret-key: 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
   s3:
-    bucket-name: ${AWS_S3_BUCKET}
-  region: ${AWS_REGION}
-
-
-
+    bucket-name: eunyu-bucket
+  region: ap-northeast-2

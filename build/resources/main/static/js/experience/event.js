@@ -1586,7 +1586,7 @@ const showPosts=async ()=> {
         console.log(user.id)
         if(recomRealOkay){
             const loading=document.getElementById("recommend-loading");
-            loading.style.display="block";
+            // loading.style.display="block";
             const request = await experienceService.getRecommendNotice();
             await experienceLayout.showRecommand(request);
             loading.style.display="none";

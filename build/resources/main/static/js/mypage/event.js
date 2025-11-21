@@ -341,6 +341,7 @@ const showProfileUpdate=async ()=>{
         profileImgPop.style.display="none";
         profileImgRound.src='/images/main-page/image.png';
         profileDeleteReal=true;
+        profileInput.value = ""; // 중요! 같은 파일 다시 선택 가능하게 초기화
     })
     // 직군 변경 모달
     job.addEventListener("click", (e) => {
