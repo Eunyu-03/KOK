@@ -1951,7 +1951,7 @@ input:-internal-autofill-selected {
         width: 100%;
     }
 
-    #quick-apply-popup{
+    div#quick-apply-popup.active{
         display: none;
         !important;
     }
