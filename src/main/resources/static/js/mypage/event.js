@@ -341,6 +341,7 @@ const showProfileUpdate=async ()=>{
         profileImgPop.style.display="none";
         profileImgRound.src='/images/main-page/image.png';
         profileDeleteReal=true;
+        profileInput.value = ""; // 중요! 같은 파일 다시 선택 가능하게 초기화
     })
     // 직군 변경 모달
     job.addEventListener("click", (e) => {
@@ -835,83 +836,101 @@ const showExperienceRequest=async ()=>{
     // return request;
 }
 
-const showStorage=async ()=>{
-    const request=await myPageService.loadStorage();
+// 보관함 화면 갱신
+const showStorage = async () => {
+    const request = await myPageService.loadStorage();
     await myPageLayout.showStorage(request);
+};
 
-    // 팝업 닫기 버튼
-    const popupRemoves = document.querySelectorAll(".popup-close");
-    popupRemoves.forEach((closeBtn) => {
-        closeBtn.addEventListener("click", () => {
+// 이벤트 초기화 (페이지 로드 시 한 번만 실행)
+function initStorageEvents() {
+    const container = document.getElementById("add-area");
+
+    if (!container) return;
+
+    // 팝업 닫기 버튼 이벤트 위임
+    container.addEventListener("click", (e) => {
+        const closeBtn = e.target.closest(".popup-close");
+        if (closeBtn) {
             const popup = closeBtn.closest(".popup-container");
-            if (popup) {
-                popup.classList.remove("active");
-            }
-        });
+            if (popup) popup.classList.remove("active");
+        }
     });
 
-    const deleteStorageBtns=document.querySelectorAll(".btn-check-container");
-    deleteStorageBtns.forEach((btn)=>{
-        btn.addEventListener("click", async () => {
+    // 삭제 버튼 이벤트 위임
+    container.addEventListener("click", async (e) => {
+        const btn = e.target.closest(".btn-check-container");
+        if (btn) {
             const li = btn.closest("li");
             const fileId = li.dataset.fileId;
             const result = await myPageService.deleteStorage(fileId);
             if (result) {
                 li.remove();
-            } else{
+            } else {
                 alert("삭제 실패");
             }
-        })
-    })
+        }
+    });
 
-    const saveStorageFilePop=document.querySelector(".storage-pop");
-    const plusBtn=document.querySelector(".plus-storage");
-    plusBtn.addEventListener("click", ()=>{
-        saveStorageFilePop.classList.add("active");
-    })
+    // 파일 추가 팝업 열기
+    container.addEventListener("click", (e) => {
+        const plusBtn = e.target.closest(".plus-storage");
+        if (plusBtn) {
+            const saveStorageFilePop = document.querySelector(".storage-pop");
+            if (saveStorageFilePop) {
+                saveStorageFilePop.classList.add("active");
+            }
+        }
+    });
 
-    // 인풋 파일 등록
-    function fileInputFn() {
-        console.log("fileInputFn() 실행");
-        const fileInput = document.getElementById("file-input");
-        const formFileLabel = document.querySelector(".form-file-label");
+    // 파일 업로드 이벤트 (한 번만 바인딩)
+    const fileInput = document.getElementById("file-input");
+    const formFileLabel = document.querySelector(".form-file-label");
+    const saveBtn = document.getElementById("pop-apply");
 
-        if (!fileInput) return;
-
+    if (fileInput && formFileLabel && saveBtn) {
         fileInput.addEventListener("change", () => {
-            if (fileInput.files.length > 0&&fileInput.files.length<2) {
-                // console.log("화면에 파일 이름 띄우기");
+            if (fileInput.files.length === 1) {
                 formFileLabel.textContent = fileInput.files[0].name;
-            }else if(fileInput.files.length>1){
-                formFileLabel.textContent=fileInput.files[0].name+" 외 "+(fileInput.files.length-1)+"개";
+            } else if (fileInput.files.length > 1) {
+                formFileLabel.textContent =
+                    fileInput.files[0].name + " 외 " + (fileInput.files.length - 1) + "개";
             } else {
                 formFileLabel.textContent = "파일";
             }
-            console.log("선택된 파일 수:", fileInput.files.length);
         });
-    //     등록하기 눌렀을 때
-        const saveBtn=document.getElementById("pop-apply");
 
         saveBtn.addEventListener("click", async (e) => {
-            // console.log("버튼 클릭됨");
+            e.preventDefault();
             if (formFileLabel.textContent === "파일") {
-                alert("파일이 선택되지 않았습니다.")
+                alert("파일이 선택되지 않았습니다.");
                 return;
             }
-            const formData=new FormData();
+            const formData = new FormData();
             for (let i = 0; i < fileInput.files.length; i++) {
                 formData.append("files", fileInput.files[i]);
             }
-            await fetch(`/api/member/storage/save`,{
+            await fetch(`/api/member/storage/save`, {
                 method: "POST",
-                body: formData
+                body: formData,
             });
             await showStorage();
-            saveStorageFilePop.classList.remove("active");
-        })
+
+            // 팝업 닫기 + input 초기화
+            const saveStorageFilePop = document.querySelector(".storage-pop");
+            if (saveStorageFilePop) saveStorageFilePop.classList.remove("active");
+            fileInput.value = "";
+            formFileLabel.textContent = "파일";
+        });
     }
-    fileInputFn();
 }
+
+// 페이지 로드 시 초기화
+document.addEventListener("DOMContentLoaded", async () => {
+    await showStorage();
+    initStorageEvents();
+});
+
 
 document.addEventListener("DOMContentLoaded", showPosts);
 document.addEventListener("DOMContentLoaded", showStorage);
