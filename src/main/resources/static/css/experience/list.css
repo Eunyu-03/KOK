@@ -1956,6 +1956,10 @@ input:-internal-autofill-selected {
         width: 100%;
     }
 
+    #quick-apply-popup{
+        display: none;
+    }
+
     .display-none-list{
         display: none;
     }
