@@ -37,11 +37,19 @@ public class MailService {
         String title = "콕 인증메일";
 
         StringBuilder body = new StringBuilder();
-        body.append("<html><body>");
-        body.append("<p>"+name+"님 링크를 클릭해 인증해 주세요."+"</p>");
-        body.append("<a href=\"http://kok-in.shop/mail/find-password-ok?code=" + code + "\">인증 하러 가기</a>");
-//        body.append("<img src=\"/images/member/kok_logo.png\">");
+        body.append("<html><body style='margin:0; padding:0; font-family:Arial, sans-serif; background-color:#f5f6f8;'>");
+        body.append("<div style='max-width:600px; margin:40px auto; background:#ffffff; border-radius:8px; padding:40px; border:1px solid #e5e5e5;'>");
 
+        body.append("<h2 style='color:#333333; margin-top:0; text-align:center;'>이메일 인증 요청</h2>");
+        body.append("<p style='font-size:16px; color:#555555; line-height:1.6;'><strong>" + name +
+                "</strong>님,<br>아래 버튼을 클릭하여 이메일 인증을 완료해 주세요.</p>");
+
+        body.append("<div style='text-align:center; margin:40px 0;'>");
+        body.append("<a href='http://localhost:10000/mail/find-password-ok?code=" + code +
+                "' style='display:inline-block; background-color:#4A7BFF; color:#ffffff; padding:14px 28px; text-decoration:none; border-radius:6px; font-size:16px; font-weight:bold;'>");
+        body.append("인증하러 가기</a></div>");
+
+        body.append("</div>");
         body.append("</body></html>");
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -79,9 +87,32 @@ public class MailService {
         String title = "(콕)알림 : "+ noticeTitle;
 
         StringBuilder body = new StringBuilder();
-        body.append("<html><body>");
-        body.append("<p>"+name+"님 팔로우 하신 "+companyName+ "기업의 공지가 올라왔습니다."+"</p>");
+        body.append("<html>");
+        body.append("<body style='margin:0; padding:0; font-family:Arial, sans-serif; background-color:#f7f8fa;'>");
 
+// 메인 컨테이너
+        body.append("<div style='max-width:600px; margin:40px auto; background:#ffffff; border-radius:10px; padding:30px; box-shadow:0 4px 12px rgba(0,0,0,0.08);'>");
+
+// 헤더
+        body.append("<h2 style='color:#333333; margin-bottom:20px; font-size:22px; text-align:center;'>📢 팔로우 기업 새 공지 알림</h2>");
+
+// 본문 문구
+        body.append("<p style='font-size:16px; color:#555555; line-height:1.6;'>");
+        body.append("<strong>"+name+"</strong>님, 팔로우하신 <strong>"+companyName+"</strong> 기업의 새로운 공지가 등록되었습니다.");
+        body.append("</p>");
+
+// 이미지
+        body.append("<div style='text-align:center; margin:25px 0;'>");
+        body.append("<img src='https://camo.githubusercontent.com/1c71bb5df10b2235cf4f2b61b098f43cade4b78581d639fdd1bcc6faacc719fe/68747470733a2f2f696d616765732e756e73706c6173682e636f6d2f70686f746f2d313530373637393739393938372d6337333737393538376363663f69786c69623d72622d342e312e3026697869643d4d3377784d6a4133664442384d48787761473930627931775957646c664878386647567566444238664878386641253344253344266175746f3d666f726d6174266669743d63726f7026713d383026773d31313731' "
+                + "alt='공지 이미지' style='max-width:100%; border-radius:10px;'>");
+        body.append("</div>");
+
+// 푸터
+        body.append("<p style='font-size:12px; color:#999999; text-align:center; margin-top:40px;'>");
+        body.append("본 메일은 알림 설정에 따라 자동 발송되었습니다.<br>");
+        body.append("</p>");
+
+        body.append("</div>"); // 컨테이너 끝
         body.append("</body></html>");
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
