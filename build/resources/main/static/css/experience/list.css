@@ -1958,6 +1958,7 @@ input:-internal-autofill-selected {
 
     div#quick-apply-popup.active{
         display: none !important;
+        cursor: default !important;
     }
 
     .display-none-list{
