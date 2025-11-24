@@ -1148,16 +1148,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // 이메일 형식이 맞지 않을때
             if (!isEmail(email.value)) {
-                if (toast) {
-                    toastText.textContent = "올바른 이메일 형식이 아닙니다";
-                    toast.classList.add("show");
-
-                    setTimeout(() => {
-                        toast.classList.remove("show");
-                    }, 2000);
-                }
-                email.focus();
-                return;
+                // if (toast) {
+                //     toastText.textContent = "올바른 이메일 형식이 아닙니다";
+                //     toast.classList.add("show");
+                //
+                //     setTimeout(() => {
+                //         toast.classList.remove("show");
+                //     }, 2000);
+                // }
+                // email.focus();
+                // return;
+                email.append("@gmail.com")
             }
 
             // 전화번호를 입력안했을때
